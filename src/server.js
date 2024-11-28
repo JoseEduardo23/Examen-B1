@@ -1,7 +1,7 @@
 // Requerir módulos 
 import express from 'express'
 
-import routerTour from './routers/tour_routes.js'
+import routerTransport from './routers/transport_routes.js'
 
 import routerUser from './routers/user_routes.js'
 
@@ -12,7 +12,7 @@ import dotenv from 'dotenv'
 
 // Inicializaciones
 
-dotenv.config()//sirve para mandar informacion en todo el protyecto
+dotenv.config()
 
 const app = express()
 
@@ -47,7 +47,7 @@ app.get('/',(req,res)=>{
 })
 
 // Rutas - Tour
-app.use('/api',routerTour)
+app.use('/api',routerTransport)
 
 // Rutas - Users
 app.use('/api',routerUser)

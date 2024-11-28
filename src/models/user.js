@@ -1,10 +1,15 @@
 
 import bcrypt from 'bcrypt';
 
+import dotenv from 'dotenv'
+
+
+dotenv.config()
+
 const userModel = {
 
     async registerUserModel(newUser){
-        const url = "http://localhost:4000/users"
+        const url = process.env.URL_BDD_USERS
         const peticion = await fetch(url,{
             method:"POST",
             body:JSON.stringify(newUser),
@@ -17,7 +22,7 @@ const userModel = {
     ,
 
     async loginUserModel(username,password){
-        const url = "http://localhost:4000/users"
+        const url = process.env.URL_BDD_USERS
         const peticion = await fetch(url)
         const users = await peticion.json()
         const user = users.find(user => user.username === username)
