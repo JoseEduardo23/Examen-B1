@@ -28,25 +28,30 @@ const getAllTransportControllerByID = async (req, res) => {
 
 
 const createTransportController = async (req,res) => {
-    const newTransportData = {
+    if (!req.files || !req.files.imagen) {
+        return res.status(400).json({ message: 'No se recibió la imagen' });
+    }
+
+    const newTourData = {
         id:uuidv4(),
         ...req.body
     }
     try {
 
-        const cloudinaryResponse = await cloudinary.uploader.upload(req.files.imagen.tempFilePath, {folder:'transports'})
+        const cloudinaryResponse = await cloudinary.uploader.upload(req.files.imagen.tempFilePath, {folder:'images'})
 
-        newTransportData.imagen = cloudinaryResponse.secure_url
-        newTransportData.public_id = cloudinaryResponse.public_id
+        newTourData.imagen = cloudinaryResponse.secure_url
+        newTourData.public_id = cloudinaryResponse.public_id
 
-        const transport = await transportModel.createTransportModel(newTransportData)
+        const tour = await transportModel.createTransportModel(newTourData)
 
         await fs.unlink(req.files.imagen.tempFilePath)
 
 
-        res.status(201).json(transport)
+        res.status(201).json(tour)
     } catch (error) {
-        res.status(500).json(error)
+        console.error('Error al cargar la informacion', error)
+        res.status(500).json({msg:'Error al cargar la informacion'})
     }
 }
 
@@ -79,7 +84,7 @@ const deleteTransportController = async (req,res) => {
 const getTransportByIDController = async (req,res) => {
     const {id} = req.params
     try {
-        const transport = await transportModel.getTransportByID(id)
+        const transport = await transportModel.getTransportByIdModel(id)
         res.status(200).json(transport)
     } catch (error) {
         res.status(500).json(error)

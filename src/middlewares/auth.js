@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const createToken = (userInfo) => {
 
-        return jwt.sign(userInfo,'secret_key',{expiresIn:'1h'}) 
+        return jwt.sign(userInfo,'secret_key',{expiresIn:'1d'}) 
 }
 
 

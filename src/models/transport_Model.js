@@ -24,14 +24,19 @@ const transportModel ={
     },
 
     async createTransportModel(newTransport){
-        const url = await fetch (process.env.URL_BDD_TRANSPORT)
-        const peticion  = await fetch(url,{
-            method:'POST',
-            body:JSON.stringify(newTransport),
-            headers:{'Content-Type':'application/json'}
-        })
-        const data = await peticion.json()
-        return data
+        const url = (process.env.URL_BDD_TRANSPORT)
+        const peticion = await fetch(url,{
+            method: 'POST',
+            body: JSON.stringify(newTransport),
+            headers: {'Content-Type': 'application/json'}
+        });
+        
+        if (!peticion.ok) {
+            throw new Error('Error al crear el transporte');
+        }
+    
+        const data = await peticion.json();
+        return data;
     }
 
     ,
@@ -54,15 +59,6 @@ const transportModel ={
         const peticion = await fetch(url,{
             method:"DELETE"
         })
-        const data = await peticion.json()
-        return data
-    }
-
-    ,
-
-
-    async getTransportByID(transportId){
-        const peticion = await fetch(`${process.env.URL_BDD_TRANSPORT}${transportId}`)
         const data = await peticion.json()
         return data
     }
