@@ -1,14 +1,12 @@
 {
-  "transports": [
-    
-  ],
+  "transports": [],
   "users": [
-    
+    {
+      "id": "0144",
+      "name": "Jose",
+      "username": "JoseE23",
+      "email": "jose.lincango@gmail.com",
+      "password": "sistemas"
+    }
   ]
 }
-
-
-
-
-
-

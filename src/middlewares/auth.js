@@ -10,8 +10,8 @@ const createToken = (userInfo) => {
 
 const verifyToken = (req,res,next) => {
 
-    const authHeader = req.headers.authorization // req.body req.params req.query
-    // authHeader = Bearer 42342334324hgjhgjh2523
+    const authHeader = req.headers.authorization 
+
     if (!authHeader || !authHeader.startsWith('Bearer ')){
         return res.status(401).json({message:"Token no proporcionado"})
     }
@@ -33,4 +33,6 @@ export {
     createToken,
     verifyToken
 }
+
+
 
