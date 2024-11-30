@@ -57,11 +57,26 @@ const createTransportController = async (req,res) => {
 
 const updateTransportController = async(req,res) => {
     const {id} = req.params
+
     try {
+        const transportFind = await transportModel.getTransportByIdModel(id)
+
+        if (req.files && req.files.imagen) {
+            if (transportFind.public_id) {
+                await cloudinary.uploader.destroy(transportFind.public_id);
+            }
+
+            const cloudinaryResponse = await cloudinary.uploader.upload(req.files.imagen.tempFilePath, {folder:'images'})
+            req.body.imagen = cloudinaryResponse.secure_url
+            req.body.public_id = cloudinaryResponse.public_id
+
+            await fs.unlink(req.files.imagen.tempFilePath)
+        }
         const transport = await transportModel.updateTransportModel(id,req.body)
         res.status(200).json(transport)
     } catch (error) {
-        req.status(500).json(error)
+        res.status(500).json(error)
+        console.log(error)
     }
 }
 
