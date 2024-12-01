@@ -43,8 +43,49 @@ const loginUserController = async (req,res) => {
 }
 
 
+const getuserByIDController= async(req,res) => {
+    const {id} = req.params;
+    try{
+        const user = await userModel.getuserbyIDModel(id);
+        if(!user){
+            return res.status(404).json({error:"Usuario no encontrado"})
+        }
+        res.status(200).json(user)
+    }catch(error){
+        console.error("Error al encontrar al estudiante", error.message)
+        res.status(500).json({error:"Internal server error"})
+    }
+}
+
+const getAlluserController = async(req,res) => {
+    const user = await userModel.getAllUserModel()
+    res.status(200).json(user)
+}
+
+const deleteuserController = async(req, res) => {
+    const {id} = req.params
+    try{
+    const user = await userModel.deletauserModel(id)
+    res.status(200).json(user)
+    }catch(error){
+        res.status(500).json(error)
+    }
+}
+const updateuserController = async (req, res) =>{
+    const {id} = req.params
+    try{
+        const user = await userModel.updateuserModel(id)
+        res.status(200).json(user)
+    }catch(error){
+        req.status(500).json(error)
+        }
+}
 
 export {
     registerUserController,
-    loginUserController
+    loginUserController,
+    getuserByIDController,
+    getAlluserController,
+    deleteuserController,
+    updateuserController
 }

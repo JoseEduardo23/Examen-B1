@@ -92,9 +92,6 @@ const getTransportByIDController = async (req,res) => {
 }
 
 
-
-
-
 export {
     getAllTransportControllers,
     getAllTransportControllerByID,
