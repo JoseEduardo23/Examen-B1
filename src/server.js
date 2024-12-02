@@ -33,7 +33,7 @@ app.use(fileUpload({
 
 
 // Variables 
-app.set('port', process.env.puerto || 3000)
+app.set('port', process.env.PORT || 3000)
 
 
 
