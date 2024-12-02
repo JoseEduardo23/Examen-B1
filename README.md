@@ -26,7 +26,7 @@ El proyecto fue realizado con las siguientes herramientas:
 - Express.js
 - Librerias NPM
 - Beeceptor para el Despliegue backend
-- Vercel para el Despliegue final
+- onrender para el Despliegue final
 - Git
 - Cloudinary para la carga de imagenes
 - Pruebas del CRUD con Insomnia
